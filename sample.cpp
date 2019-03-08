@@ -6,23 +6,8 @@
 #include <FL/gl.h>
 
 #include "modelerglobals.h"
+#include "sample.h"
 
-// To make a SampleModel, we inherit off of ModelerView
-class SampleModel : public ModelerView 
-{
-public:
-    SampleModel(int x, int y, int w, int h, char *label) 
-        : ModelerView(x,y,w,h,label) { }
-
-    virtual void draw();
-};
-
-// We need to make a creator function, mostly because of
-// nasty API stuff that we'd rather stay away from.
-ModelerView* createSampleModel(int x, int y, int w, int h, char *label)
-{ 
-    return new SampleModel(x,y,w,h,label); 
-}
 
 // We are going to override (is that the right word?) the draw()
 // method of ModelerView to draw out SampleModel
@@ -68,20 +53,4 @@ void SampleModel::draw()
 		glPopMatrix();
 
 	glPopMatrix();
-}
-
-int main()
-{
-	// Initialize the controls
-	// Constructor is ModelerControl(name, minimumvalue, maximumvalue, 
-	// stepsize, defaultvalue)
-    ModelerControl controls[NUMCONTROLS];
-    controls[XPOS] = ModelerControl("X Position", -5, 5, 0.1f, 0);
-    controls[YPOS] = ModelerControl("Y Position", 0, 5, 0.1f, 0);
-    controls[ZPOS] = ModelerControl("Z Position", -5, 5, 0.1f, 0);
-    controls[HEIGHT] = ModelerControl("Height", 1, 2.5, 0.1f, 1);
-	controls[ROTATE] = ModelerControl("Rotate", -135, 135, 1, 0);
-
-    ModelerApplication::Instance()->Init(&createSampleModel, controls, NUMCONTROLS);
-    return ModelerApplication::Instance()->Run();
 }
