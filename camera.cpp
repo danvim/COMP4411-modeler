@@ -1,6 +1,9 @@
 #include <windows.h>
 #include <Fl/gl.h>
 #include <gl/glu.h>
+#include <Eigen/Dense>
+
+using namespace Eigen;
 
 #include "camera.h"
 
@@ -178,9 +181,27 @@ void Camera::applyViewingTransform() {
 
 	// Place the camera at mPosition, aim the camera at
 	// mLookAt, and twist the camera such that mUpVector is up
-	gluLookAt(	mPosition[0], mPosition[1], mPosition[2],
-				mLookAt[0],   mLookAt[1],   mLookAt[2],
-				mUpVector[0], mUpVector[1], mUpVector[2]);
+	// gluLookAt(	mPosition[0], mPosition[1], mPosition[2],
+	// 			mLookAt[0],   mLookAt[1],   mLookAt[2],
+	// 			mUpVector[0], mUpVector[1], mUpVector[2]);
+
+	// Reference: https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/gluLookAt.xml
+	Vector3d eye(mPosition[0], mPosition[1], mPosition[2]),
+		center(mLookAt[0], mLookAt[1], mLookAt[2]),
+		up(mUpVector[0], mUpVector[1], mUpVector[2]);
+	Vector3d F = center - eye;
+	Vector3d f = F.normalized();		//z
+	// Vector3d upn = up.normalized();
+	Vector3d s = f.cross(up).normalized();			//x
+	Vector3d u = s.cross(f).normalized();	//y
+	
+	double M[4][4] = { {s(0),u(0),-f(0),0},
+	{s(1),u(1),-f(1),0},
+	{s(2),u(2),-f(2),0},
+	{0,0,0,1}};
+	
+	glMultMatrixd(*M);
+	glTranslated(-eye(0), -eye(1), -eye(2));
 }
 
 #pragma warning(pop)

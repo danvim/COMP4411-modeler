@@ -9,7 +9,7 @@ Programming project 2 of HKUST Computer Graphics course COMP4411
   - [ ] use `glPushMatrix` and `glPopMatrix` to nest the levels
 - [ ] Sliders to control single component
 - [ ] Sliders to control a action which move multiple components at the same time
-- [ ] Implement `gluLookAt`
+- [x] Implement `gluLookAt`
 - [ ] Complete 2 bells
 
 ## Bonus
