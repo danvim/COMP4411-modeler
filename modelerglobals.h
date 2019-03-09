@@ -8,9 +8,12 @@
 // This is a list of the controls for the SampleModel
 // We'll use these constants to access the values 
 // of the controls from the user interface.
+
+// v is rotation angle using the axis along the arm
+// h is rotation angle of joint
 enum SampleModelControls
 { 
-	XPOS, YPOS, ZPOS, HEIGHT, ROTATE, NUMCONTROLS
+	XPOS, YPOS, ZPOS, HEIGHT, ROTATE, ARM1V, ARM1H, ARM2V, ARM2H, ARM3V, ARM3H, CLAMPWIDTH, NUMCONTROLS
 };
 
 // Colors

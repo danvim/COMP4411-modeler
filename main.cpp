@@ -7,11 +7,13 @@
 #include "modelerglobals.h"
 
 #include "MyModel.h"
+#include "sample.h"
 
 // We need to make a creator function, mostly because of
 // nasty API stuff that we'd rather stay away from.
 ModelerView* createSampleModel(int x, int y, int w, int h, char *label)
 {
+	// return new SampleModel(x, y, w, h, label);
 	return new MyModel(x, y, w, h, label);
 }
 
@@ -26,6 +28,13 @@ int main()
 	controls[ZPOS] = ModelerControl("Z Position", -5, 5, 0.1f, 0);
 	controls[HEIGHT] = ModelerControl("Height", 1, 2.5, 0.1f, 1);
 	controls[ROTATE] = ModelerControl("Rotate", -135, 135, 1, 0);
+	controls[ARM1V] = ModelerControl("Arm1 Vertical Axis Rotation", -180, 180, 1, 0);
+	controls[ARM1H] = ModelerControl("Arm1 Horizontal Axis Rotation", -180, 180, 1, 0);
+	controls[ARM2V] = ModelerControl("Arm2 Vertical Axis Rotation", -180, 180, 1, 0);
+	controls[ARM2H] = ModelerControl("Arm2 Horizontal Axis Rotation", -180, 180, 1, 0);
+	controls[ARM3V] = ModelerControl("Arm3 Vertical Axis Rotation", -180, 180, 1, 0);
+	controls[ARM3H] = ModelerControl("Arm3 Horizontal Axis Rotation", -180, 180, 1, 0);
+	controls[CLAMPWIDTH] = ModelerControl("Clamp Width", 0, 0.5, 0.01, 0);
 
 	ModelerApplication::Instance()->Init(&createSampleModel, controls, NUMCONTROLS);
 	return ModelerApplication::Instance()->Run();

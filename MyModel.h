@@ -16,4 +16,6 @@ public:
 		: ModelerView(x, y, w, h, label) { }
 
 	virtual void draw();
+	void drawArm(int levels, int curDept = 0);
+	void drawClamp();
 };
