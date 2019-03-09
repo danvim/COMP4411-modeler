@@ -77,24 +77,27 @@ void MyModel::drawArm(int levels, int curDept)
 
 void MyModel::drawClamp()
 {
-	const double palmThickness = 0.2;
-	const double fingerThickness = 0.1;
+	// const double palmThickness = 0.2;
+	const double fingerThickness = 0.2;
 	const double fingerLength = 0.5;
 
 	glPushMatrix();
-		glTranslated(-0.5, 0, -0.5);
-		drawBox(1, palmThickness, 1);
-	glPopMatrix();
-
-	glPushMatrix();
-		glTranslated(0, palmThickness, 0);
+		glTranslated(0, 0, 0);
 		glPushMatrix();
-			glTranslated(-VAL(CLAMPWIDTH), 0, -fingerThickness);
-			drawBox(fingerThickness, fingerLength, fingerThickness);
+			glTranslated(-1, 0, -0.5);
+			drawBox(2, 1, 1);
 		glPopMatrix();
+
 		glPushMatrix();
-			glTranslated(VAL(CLAMPWIDTH), 0, fingerThickness);
-			drawBox(fingerThickness, fingerLength, fingerThickness);
+			glTranslated(0, 1, 0);
+			glPushMatrix();
+				glTranslated(-VAL(CLAMPWIDTH)-fingerThickness/2, 0, -0.5);
+				drawBox(fingerThickness, fingerLength, 1);
+			glPopMatrix();
+			glPushMatrix();
+				glTranslated(VAL(CLAMPWIDTH) , 0, -0.5);
+				drawBox(fingerThickness, fingerLength, 1);
+			glPopMatrix();
 		glPopMatrix();
 	glPopMatrix();
 }

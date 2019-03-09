@@ -4,11 +4,11 @@ Programming project 2 of HKUST Computer Graphics course COMP4411
 
 ## Basic Requirements
 
-- [ ] Own character (10 primitive shapes, 4 level of hierarchy)
-  - [ ] each level need at least one `glTranslate` `glRotate` or `glScale`
-  - [ ] use `glPushMatrix` and `glPopMatrix` to nest the levels
-- [ ] Sliders to control single component
-- [ ] Sliders to control a action which move multiple components at the same time
+- [x] Own character (10 primitive shapes, 4 level of hierarchy)
+  - [x] each level need at least one `glTranslate` `glRotate` or `glScale`
+  - [x] use `glPushMatrix` and `glPopMatrix` to nest the levels
+- [x] Sliders to control single component
+- [x] Sliders to control a action which move multiple components at the same time
 - [x] Implement `gluLookAt`
 - [ ] Complete 2 bells
 

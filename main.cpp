@@ -29,12 +29,12 @@ int main()
 	controls[HEIGHT] = ModelerControl("Height", 1, 2.5, 0.1f, 1);
 	controls[ROTATE] = ModelerControl("Rotate", -135, 135, 1, 0);
 	controls[ARM1V] = ModelerControl("Arm1 Vertical Axis Rotation", -180, 180, 1, 0);
-	controls[ARM1H] = ModelerControl("Arm1 Horizontal Axis Rotation", -180, 180, 1, 0);
+	controls[ARM1H] = ModelerControl("Arm1 Horizontal Axis Rotation", -90, 90, 1, 0);
 	controls[ARM2V] = ModelerControl("Arm2 Vertical Axis Rotation", -180, 180, 1, 0);
-	controls[ARM2H] = ModelerControl("Arm2 Horizontal Axis Rotation", -180, 180, 1, 0);
+	controls[ARM2H] = ModelerControl("Arm2 Horizontal Axis Rotation", -90, 90, 1, 0);
 	controls[ARM3V] = ModelerControl("Arm3 Vertical Axis Rotation", -180, 180, 1, 0);
-	controls[ARM3H] = ModelerControl("Arm3 Horizontal Axis Rotation", -180, 180, 1, 0);
-	controls[CLAMPWIDTH] = ModelerControl("Clamp Width", 0, 0.5, 0.01, 0);
+	controls[ARM3H] = ModelerControl("Arm3 Horizontal Axis Rotation", -90, 90, 1, 0);
+	controls[CLAMPWIDTH] = ModelerControl("Clamp Width", 0, 1, 0.01, 0);
 
 	ModelerApplication::Instance()->Init(&createSampleModel, controls, NUMCONTROLS);
 	return ModelerApplication::Instance()->Run();
