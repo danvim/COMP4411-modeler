@@ -35,6 +35,9 @@ int main()
 	controls[ARM3V] = ModelerControl("Arm3 Vertical Axis Rotation", -180, 180, 1, 0);
 	controls[ARM3H] = ModelerControl("Arm3 Horizontal Axis Rotation", -90, 90, 1, 0);
 	controls[CLAMPWIDTH] = ModelerControl("Clamp Width", 0, 1, 0.01, 0);
+	controls[LIGHTX] = ModelerControl("Light X", -30, 30, 0.1, -20);
+	controls[LIGHTY] = ModelerControl("Light Y", -30, 30, 0.1, 12);
+	controls[LIGHTZ] = ModelerControl("Light Z", -30, 30, 0.1, 20);
 
 	ModelerApplication::Instance()->Init(&createSampleModel, controls, NUMCONTROLS);
 	return ModelerApplication::Instance()->Run();

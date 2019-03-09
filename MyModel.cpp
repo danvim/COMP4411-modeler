@@ -10,6 +10,14 @@ void MyModel::draw()
 	// projection matrix, don't bother with this ...
 	ModelerView::draw();
 
+	glEnable(GL_LIGHTING);
+	GLfloat lightPosition0[4];
+	lightPosition0[0] = VAL(LIGHTX);
+	lightPosition0[1] = VAL(LIGHTY);
+	lightPosition0[2] = VAL(LIGHTZ);
+	lightPosition0[3] = 1;
+	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition0);
+
 	// draw the floor
 	setAmbientColor(.1f, .1f, .1f);
 	setDiffuseColor(COLOR_RED);
