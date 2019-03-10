@@ -19,6 +19,8 @@ ModelerView* createSampleModel(int x, int y, int w, int h, char *label)
 
 int main()
 {
+	initTextures();
+
 	// Initialize the controls
 	// Constructor is ModelerControl(name, minimumvalue, maximumvalue, 
 	// stepsize, defaultvalue)

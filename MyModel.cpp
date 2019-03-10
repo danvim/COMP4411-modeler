@@ -39,7 +39,7 @@ void MyModel::draw()
 		// glTranslated(-1, 0, -1);
 		glScaled(1, VAL(HEIGHT), 1);
 		glRotated(-90, 1, 0, 0);
-		drawCylinder(1, 2, 2);
+		drawTextureCylinder(1, 2, 2);
 		glPopMatrix();
 
 		//arm

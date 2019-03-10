@@ -3,6 +3,12 @@
 #include <GL/glu.h>
 #include <cstdio>
 #include <math.h>
+#include "bitmap.h"
+
+
+int textureCheckerW, textureCheckerH;
+GLubyte* textureChecker = NULL;
+GLuint textureCheckerID;
 
 // ********************************************************
 // Support functions from previous version of modeler
@@ -378,6 +384,29 @@ void drawCylinder( double h, double r1, double r2 )
     }
     
 }
+
+void drawTextureCylinder(double h, double r1, double r2)
+{	
+	// reference: http://www.opengl-tutorial.org/cn/beginners-tutorials/tutorial-5-a-textured-cube/
+
+	// "Bind" the newly created texture : all future texture functions will modify this texture
+	glBindTexture(GL_TEXTURE_2D, textureCheckerID);
+
+	// Give the image to OpenGL
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textureCheckerW, textureCheckerH, 0, GL_RGB, GL_UNSIGNED_BYTE, textureChecker);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+	glEnable(GL_TEXTURE_2D);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
+	glBindTexture(GL_TEXTURE_2D, textureCheckerID);
+	
+	drawCylinder(h, r1, r2);
+	
+	glDisable(GL_TEXTURE_2D);
+}
+
 void drawTriangle( double x1, double y1, double z1,
                    double x2, double y2, double z2,
                    double x3, double y3, double z3 )
@@ -414,6 +443,13 @@ void drawTriangle( double x1, double y1, double z1,
         glVertex3d( x3, y3, z3 );
         glEnd();
     }
+}
+
+void initTextures()
+{
+	delete[] textureChecker;
+	textureChecker = readBMP("grid.bmp", textureCheckerW, textureCheckerH);
+	glGenTextures(1, &textureCheckerID);
 }
 
 
