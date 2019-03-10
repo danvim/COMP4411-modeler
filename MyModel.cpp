@@ -29,6 +29,9 @@ void MyModel::draw()
 	// draw the model
 	setAmbientColor(.1f, .1f, .1f);
 	setDiffuseColor(COLOR_GREEN);
+
+	// drawTest();
+
 	glPushMatrix();
 	glTranslated(VAL(XPOS), VAL(YPOS), VAL(ZPOS));
 
@@ -119,5 +122,13 @@ void MyModel::drawClamp()
 				drawBox(fingerThickness, fingerLength, 1);
 			glPopMatrix();
 		glPopMatrix();
+	glPopMatrix();
+}
+
+void MyModel::drawTest()
+{
+	glPushMatrix();
+	glTranslated(3, 3, 3);
+	drawTriangularColumn(1, 1, 1, 1);
 	glPopMatrix();
 }

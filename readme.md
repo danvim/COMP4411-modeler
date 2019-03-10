@@ -19,7 +19,7 @@ B: Bell, W: Whistle, 1B=2W
 - [x] **(1W)** Light source
   - [x] **(1W)** (hierarchical) level of details
 - [x] **(1B)** Texture map
-- [ ] **(1B)** Polygon faces shape
+- [x] **(1B)** Polygon faces shape
 - [ ] **(1B)** Animated sequence
 - [ ] (1B) Widget to control param and create individual-looking instances
 - [x] **(1B)** Fit whole model in camera (Frame All)
