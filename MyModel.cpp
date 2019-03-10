@@ -33,18 +33,24 @@ void MyModel::draw()
 	glTranslated(VAL(XPOS), VAL(YPOS), VAL(ZPOS));
 
 	//base
-	glPushMatrix();
-	// glTranslated(-1, 0, -1);
-	glScaled(1, VAL(HEIGHT), 1);
-	glRotated(-90, 1, 0, 0);
-	drawCylinder(1, 2, 2);
-	glPopMatrix();
+	if(VAL(LEVELDETAILS)>0)
+	{
+		glPushMatrix();
+		// glTranslated(-1, 0, -1);
+		glScaled(1, VAL(HEIGHT), 1);
+		glRotated(-90, 1, 0, 0);
+		drawCylinder(1, 2, 2);
+		glPopMatrix();
 
-	//
-	glPushMatrix();
-	glTranslated(0, VAL(HEIGHT), 0);
-	drawArm(3);
-	glPopMatrix();
+		//arm
+		if(VAL(LEVELDETAILS)>1)
+		{
+			glPushMatrix();
+			glTranslated(0, VAL(HEIGHT), 0);
+			drawArm(3);
+			glPopMatrix();
+		}
+	}
 	
 
 	glPopMatrix();
@@ -54,7 +60,10 @@ void MyModel::drawArm(int levels, int curDept)
 {
 	if(levels == 0)
 	{
-		drawClamp();
+		if(VAL(LEVELDETAILS) > 1 + curDept)
+		{
+			drawClamp();
+		}
 		return;
 	}
 
@@ -78,7 +87,10 @@ void MyModel::drawArm(int levels, int curDept)
 		glPopMatrix();
 
 		//recursively draw the rest of arm
-		drawArm(levels - 1, curDept + 1);
+		if(VAL(LEVELDETAILS)>1+ curDept)
+		{
+			drawArm(levels - 1, curDept + 1);
+		}
 
 	glPopMatrix();
 }

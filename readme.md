@@ -17,7 +17,7 @@ Programming project 2 of HKUST Computer Graphics course COMP4411
 B: Bell, W: Whistle, 1B=2W
 
 - [x] **(1W)** Light source
-  - [ ] **(1W)** (hierarchical) level of details
+  - [x] **(1W)** (hierarchical) level of details
 - [ ] **(1B)** Texture map
 - [ ] **(1B)** Polygon faces shape
 - [ ] **(1B)** Animated sequence
