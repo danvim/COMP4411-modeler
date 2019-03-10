@@ -30,7 +30,7 @@ void MyModel::draw()
 	setAmbientColor(.1f, .1f, .1f);
 	setDiffuseColor(COLOR_GREEN);
 
-	drawTest();
+	// drawTest();
 
 	glPushMatrix();
 	glTranslated(VAL(XPOS), VAL(YPOS), VAL(ZPOS));
