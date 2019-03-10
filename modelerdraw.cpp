@@ -415,7 +415,7 @@ void drawTriangularColumn(double h, double l1, double l2, double l3)
 	Vector3d Z(0, 0, 1);
 
 	Vector3d A = origin, B = Vector3d(l1,0,0), D = Vector3d(0,0,h), C = Vector3d(l1,0,h);
-	double theta = acos((l2*l2 - l1 * l1 - l3 * l3) / (2 * l1*l3));
+	double theta = acos((l1 * l1 + l3 * l3 - l2*l2) / (2 * l1*l3));
 	Vector3d E = l3 * cos(theta)*X + l3 * sin(theta)*Y;
 	Vector3d F = E + h * Z;
 
@@ -425,6 +425,8 @@ void drawTriangularColumn(double h, double l1, double l2, double l3)
 	drawTriangle(E, F, C);
 	drawTriangle(A, D, F);
 	drawTriangle(A, F, E);
+	drawTriangle(A, E, B);
+	drawTriangle(C, F, D);
 }
 
 void drawTriangle( double x1, double y1, double z1,
@@ -476,15 +478,4 @@ void initTextures()
 	textureChecker = readBMP("grid.bmp", textureCheckerW, textureCheckerH);
 	glGenTextures(1, &textureCheckerID);
 }
-
-
-
-
-
-
-
-
-
-
-
 
