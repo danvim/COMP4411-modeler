@@ -10,7 +10,7 @@ Programming project 2 of HKUST Computer Graphics course COMP4411
 - [x] Sliders to control single component
 - [x] Sliders to control a action which move multiple components at the same time
 - [x] Implement `gluLookAt`
-- [ ] Complete 2 bells
+- [x] Complete 2 bells
 
 ## Bonus
 
@@ -22,7 +22,7 @@ B: Bell, W: Whistle, 1B=2W
 - [ ] **(1B)** Polygon faces shape
 - [ ] **(1B)** Animated sequence
 - [ ] (1B) Widget to control param and create individual-looking instances
-- [ ] **(1B)** Fit whole model in camera
+- [x] **(1B)** Fit whole model in camera (Frame All)
 - [ ] (1B1W) an intuitive way for the user to twist the camera via mouse control.
 - [ ] *(2B)* New primitives (is it 2B for each)
   - [ ] 1. Given Curve A and B, surface form by sweep A through B

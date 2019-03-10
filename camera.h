@@ -68,6 +68,16 @@ public:
     { mLookAt = lookAt; mDirtyTransform = true;}
     inline Vec3f getLookAt() const
     { return mLookAt; }
+
+	inline void frameAll()
+    {
+		mElevation = 6.7054;
+		mAzimuth = 2.7193;
+		mDolly = -30;
+		mLookAt = Vec3<float>(0.5, 2, -0.5);
+		mPosition = Vec3<float>(-9.5, 15, 21.5);
+		mDirtyTransform = true;
+    }
     
     //---[ Interactive Adjustment ]------------------------
     // these should be used from a mouse event handling routine that calls
