@@ -18,4 +18,5 @@ public:
 	virtual void draw();
 	void drawArm(int levels, int curDept = 0);
 	void drawClamp();
+	void drawTest();
 };

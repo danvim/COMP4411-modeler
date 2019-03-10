@@ -407,6 +407,26 @@ void drawTextureCylinder(double h, double r1, double r2)
 	glDisable(GL_TEXTURE_2D);
 }
 
+void drawTriangularColumn(double h, double l1, double l2, double l3)
+{
+	Vector3d origin(0, 0, 0);
+	Vector3d X(1, 0, 0);
+	Vector3d Y(0, 1, 0);
+	Vector3d Z(0, 0, 1);
+
+	Vector3d A = origin, B = Vector3d(l1,0,0), D = Vector3d(0,0,h), C = Vector3d(l1,0,h);
+	double theta = acos((l2*l2 - l1 * l1 - l3 * l3) / (2 * l1*l3));
+	Vector3d E = l3 * cos(theta)*X + l3 * sin(theta)*Y;
+	Vector3d F = E + h * Z;
+
+	drawTriangle(A, B, C);
+	drawTriangle(A, C, D);
+	drawTriangle(C, B, E);
+	drawTriangle(E, F, C);
+	drawTriangle(A, D, F);
+	drawTriangle(A, F, E);
+}
+
 void drawTriangle( double x1, double y1, double z1,
                    double x2, double y2, double z2,
                    double x3, double y3, double z3 )
@@ -443,6 +463,11 @@ void drawTriangle( double x1, double y1, double z1,
         glVertex3d( x3, y3, z3 );
         glEnd();
     }
+}
+
+void drawTriangle(Vector3d p1, Vector3d p2, Vector3d p3)
+{
+	drawTriangle(p1(0), p1(1), p1(2), p2(0), p2(1), p2(2), p3(0), p3(1), p3(2));
 }
 
 void initTextures()

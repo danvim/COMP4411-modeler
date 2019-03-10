@@ -6,10 +6,12 @@
 #define MODELERDRAW_H
 
 #include <FL/gl.h>
+#include <Eigen/Dense>
 #include <cstdio>
 
 #include "modelerglobals.h"
 
+using namespace Eigen;
 
 enum DrawModeSetting_t 
 { NONE=0, NORMAL, WIREFRAME, FLATSHADE, };
@@ -90,10 +92,14 @@ void drawTextureBox( double x, double y, double z );
 void drawCylinder( double h, double r1, double r2 );
 void drawTextureCylinder( double h, double r1, double r2 );
 
+void drawTriangularColumn(double h, double l1, double l2, double l3);
+
 // Driangle with three given vertices.  Specify in counterclockwise direction
 void drawTriangle( double x1, double y1, double z1,
 			       double x2, double y2, double z2,
 			       double x3, double y3, double z3 );
+
+inline void drawTriangle(Vector3d p1, Vector3d p2, Vector3d p3);
 
 void initTextures();
 
