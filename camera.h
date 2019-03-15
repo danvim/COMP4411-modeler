@@ -29,6 +29,7 @@ protected:
     
     Vec3f			mLastMousePosition;
     MouseAction_t	mCurrentMouseAction;
+	int lastScroll;
     
     
 public:

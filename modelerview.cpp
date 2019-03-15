@@ -6,6 +6,7 @@
 #include <FL/gl.h>
 #include <GL/glu.h>
 #include <cstdio>
+#include <FL/Fl_Scroll.H>
 
 static const int	kMouseRotationButton			= FL_LEFT_MOUSE;
 static const int	kMouseTranslationButton			= FL_MIDDLE_MOUSE;
@@ -66,6 +67,10 @@ int ModelerView::handle(int event)
           //  printf("release %d %d\n", eventCoordX, eventCoordY);
 		}
 		break;
+	case FL_MOUSEWHEEL:
+		{
+			m_camera->clickMouse(kActionTwist, eventCoordX, eventCoordY);
+		}
 	default:
 		return 0;
 	}

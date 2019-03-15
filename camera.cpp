@@ -94,10 +94,15 @@ void Camera::calculateViewingTransformParameters()
 	// grouped for (mat4 * vec3) ops instead of (mat4 * mat4) ops
 	mPosition = originXform * (azimXform * (elevXform * (dollyXform * mPosition)));
 
+	float r = getTwist() * M_PI / 180.f;
+	float c = cos(r), s = sin(r);
+
 	if ( fmod((double)mElevation, 2.0*M_PI) < 3*M_PI/2 && fmod((double)mElevation, 2.0*M_PI) > M_PI/2 )
-		mUpVector= Vec3f(0,-1,0);
+		mUpVector= Vec3f(s,-c,0);
 	else
-		mUpVector= Vec3f(0,1,0);
+		mUpVector= Vec3f(s,c,0);
+
+	mUpVector.normalize();
 
 	mDirtyTransform = false;
 }
@@ -108,6 +113,7 @@ Camera::Camera()
 	mDolly = -20.0f;
 	mElevation = 0.2f;
 	mAzimuth = (float)M_PI;
+	mTwist = 0.0f;
 
 	mLookAt = Vec3f( 0, 0, 0 );
 	mCurrentMouseAction = kActionNone;
@@ -117,9 +123,18 @@ Camera::Camera()
 
 void Camera::clickMouse( MouseAction_t action, int x, int y )
 {
+	if (action == kActionTwist)
+	{
+		setTwist(getTwist() + y - lastScroll);
+		calculateViewingTransformParameters();
+		mDirtyTransform = true;
+		lastScroll = y;
+	}else
+	{
+		mLastMousePosition[0] = x;
+		mLastMousePosition[1] = y;
+	}
 	mCurrentMouseAction = action;
-	mLastMousePosition[0] = x;
-	mLastMousePosition[1] = y;
 }
 
 void Camera::dragMouse( int x, int y )
@@ -162,7 +177,7 @@ void Camera::dragMouse( int x, int y )
 			break;
 		}
 	case kActionTwist:
-		// Not implemented
+		//not implemtented here
 	default:
 		break;
 	}
