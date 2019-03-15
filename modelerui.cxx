@@ -275,7 +275,7 @@ Fl_Menu_Item ModelerUserInterface::menu_m_controlsMenuBar[] = {
  {"Frame All", 0,  (Fl_Callback*)ModelerUserInterface::cb_FrameAll, 0, 0, 0, 0, 14, 0},
  {0},
  {"Animate", 0,  0, 0, 64, 0, 0, 14, 0},
- {"Enable", 0,  (Fl_Callback*)ModelerUserInterface::cb_m_controlsAnimOnMenu, 0, 2, 0, 0, 14, 0},
+ //{"Enable", 0,  (Fl_Callback*)ModelerUserInterface::cb_m_controlsAnimOnMenu, 0, 2, 0, 0, 14, 0},
  {0},
  {0}
 };
