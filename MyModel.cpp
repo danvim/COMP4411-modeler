@@ -154,8 +154,14 @@ void MyModel::drawArm(int levels, int curDept)
 		glRotated(VAL(ARM1H + curDept * 2)+moodTick, 0, 0, 1);
 
 		glPushMatrix();
-		glTranslated(0, 0, -0.5);
-		drawCylinder(1, 1, 1);
+		if(VAL(BALLJOINTS))
+		{
+			drawSphere(1);
+		}else
+		{
+			glTranslated(0, 0, -0.5);
+			drawCylinder(1, 1, 1);
+		}
 		glPopMatrix();
 
 		//recursively draw the rest of arm

@@ -21,7 +21,7 @@ B: Bell, W: Whistle, 1B=2W
 - [x] **(1B)** Texture map
 - [x] **(1B)** Polygon faces shape
 - [x] **(1B)** Animated sequence
-- [ ] (1B) Widget to control param and create individual-looking instances
+- [x] (1B) Widget to control param and create individual-looking instances
 - [x] **(1B)** Fit whole model in camera (Frame All)
 - [x] (1B1W) an intuitive way for the user to twist the camera via mouse control.
 - [ ] *(2B)* New primitives (is it 2B for each)

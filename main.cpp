@@ -49,6 +49,7 @@ int main()
 	controls[LLEN] = ModelerControl("Lsystem: length", 0.01, 1, 0.01, 0.2);
 	controls[LTHICKNESS] = ModelerControl("Lsystem: thickness", 0.01, 1, 0.01, 0.1);
 	controls[LDECAY] = ModelerControl("Lsystem: decay", 0.01, 1, 0.01, 1);
+	controls[BALLJOINTS] = ModelerControl("Ball joints", 0, 1,1, 0);
 
 	ModelerApplication::Instance()->Init(&createSampleModel, controls, NUMCONTROLS);
 	return ModelerApplication::Instance()->Run();
