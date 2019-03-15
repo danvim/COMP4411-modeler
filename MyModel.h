@@ -20,6 +20,7 @@ public:
 	void drawClamp();
 	void drawTest();
 	bool isAnimating();
+	void drawLsystem(int systype, int branchtype, int depth, float length, int angle, double thickness, double decay);
 
 	int animTick = 0, maxAnimTick = 360, moodTick = 0, maxMoodTick = 30;
 	bool moodUp = true;

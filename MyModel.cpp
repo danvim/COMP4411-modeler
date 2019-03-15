@@ -7,6 +7,43 @@ bool MyModel::isAnimating() {
 	return ModelerApplication::Instance()->GetAnimating(); 
 }
 
+void MyModel::drawLsystem(int systype, int branchtype, int depth, float length, int angle,double thickness,double decay)
+{
+	if(depth == 0)
+	{
+		return;
+	}
+	switch(systype)
+	{
+	default:
+		glPushMatrix();
+
+
+		glPushMatrix();
+		glRotated(-90, 1, 0, 0);
+		drawCylinder(length, thickness, thickness*decay);
+		glPopMatrix();
+
+		glRotated(angle, 0, 1, 0);
+
+		glPushMatrix();
+		glTranslated(0, length, 0);
+		glRotated(-angle, 0, 0, 1);
+		drawLsystem(systype, 0, depth - 1, length*decay, angle,thickness*decay,decay);
+		glPopMatrix();
+
+		glRotated(angle, 0, 1, 0);
+
+		glPushMatrix();
+		glTranslated(0, length, 0);
+		glRotated(angle, 0, 0, 1);
+		drawLsystem(systype, 0, depth - 1, length*decay, angle,thickness*decay,decay);
+		glPopMatrix();
+
+		glPopMatrix();
+	}
+}
+
 // We are going to override (is that the right word?) the draw()
 // method of ModelerView to draw out MyModel
 void MyModel::draw()
@@ -63,6 +100,11 @@ void MyModel::draw()
 	glTranslated(VAL(XPOS), VAL(YPOS), VAL(ZPOS));
 
 	//base
+	if(VAL(LDISP))
+	{
+		drawLsystem(VAL(LDISP), 0, VAL(LDEPTH), VAL(LLEN), VAL(LANGLE),VAL(LTHICKNESS),VAL(LDECAY));
+		return;
+	}
 	if(VAL(LEVELDETAILS)>0)
 	{
 		glPushMatrix();
@@ -112,8 +154,14 @@ void MyModel::drawArm(int levels, int curDept)
 		glRotated(VAL(ARM1H + curDept * 2)+moodTick, 0, 0, 1);
 
 		glPushMatrix();
-		glTranslated(0, 0, -0.5);
-		drawCylinder(1, 1, 1);
+		if(VAL(BALLJOINTS))
+		{
+			drawSphere(1);
+		}else
+		{
+			glTranslated(0, 0, -0.5);
+			drawCylinder(1, 1, 1);
+		}
 		glPopMatrix();
 
 		//recursively draw the rest of arm

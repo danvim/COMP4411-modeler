@@ -43,6 +43,13 @@ int main()
 	controls[LEVELDETAILS] = ModelerControl("Level of Details", 0, 10, 1, 10);
 	controls[ENABLEANIM] = ModelerControl("Enable Anim", 0, 1, 1, 0);
 	controls[CYCLINGMOOD] = ModelerControl("Cycling Mood", 0, 1, 1, 0);
+	controls[LDISP] = ModelerControl("Lsystem: display", 0, 1, 1, 0);
+	controls[LDEPTH] = ModelerControl("Lsystem: depth", 1, 6, 1, 4);
+	controls[LANGLE] = ModelerControl("Lsystem: angle", 0, 360, 1, 30);
+	controls[LLEN] = ModelerControl("Lsystem: length", 0.01, 1, 0.01, 0.2);
+	controls[LTHICKNESS] = ModelerControl("Lsystem: thickness", 0.01, 1, 0.01, 0.1);
+	controls[LDECAY] = ModelerControl("Lsystem: decay", 0.01, 1, 0.01, 1);
+	controls[BALLJOINTS] = ModelerControl("Ball joints", 0, 1,1, 0);
 
 	ModelerApplication::Instance()->Init(&createSampleModel, controls, NUMCONTROLS);
 	return ModelerApplication::Instance()->Run();
