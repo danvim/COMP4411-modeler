@@ -2,6 +2,11 @@
 #include "modelerapp.h"
 
 
+bool MyModel::isAnimating() {
+	//return true;
+	return ModelerApplication::Instance()->GetAnimating(); 
+}
+
 // We are going to override (is that the right word?) the draw()
 // method of ModelerView to draw out MyModel
 void MyModel::draw()
@@ -13,7 +18,7 @@ void MyModel::draw()
 
 	bool flag = isAnimating();
 
-	if(flag || isAnimating())
+	if(isAnimating())
 	{
 		if(VAL(CYCLINGMOOD))
 		{
@@ -24,7 +29,7 @@ void MyModel::draw()
 			{
 				moodTick--;
 			}
-			if(moodTick==maxMoodTick-1 || moodTick==0)
+			if(moodTick==maxMoodTick-1 || moodTick==-maxMoodTick)
 			{
 				moodUp = !moodUp;
 			}
@@ -133,7 +138,7 @@ void MyModel::drawClamp()
 
 	if(isAnimating())
 	{
-		ModelerApplication::Instance()->SetControlValue(CLAMPWIDTH, sin(rad(animTick)) / 2.f + 0.5);
+		ModelerApplication::Instance()->SetControlValue(CLAMPWIDTH, sin(16*rad(animTick)) / 2.f + 0.5);
 	}
 
 	glPushMatrix();

@@ -19,7 +19,7 @@ public:
 	void drawArm(int levels, int curDept = 0);
 	void drawClamp();
 	void drawTest();
-	bool isAnimating() { return ModelerApplication::Instance()->m_animating; }
+	bool isAnimating();
 
 	int animTick = 0, maxAnimTick = 360, moodTick = 0, maxMoodTick = 30;
 	bool moodUp = true;
