@@ -45,6 +45,10 @@ int ModelerView::handle(int event)
 				m_camera->clickMouse(kActionZoom, eventCoordX, eventCoordY );
 				break;
 			}
+			if (Fl::event_ctrl())
+			{
+				m_camera->clickMouse(kActionTwist, eventCoordX, eventCoordY);
+			}
            // printf("push %d %d\n", eventCoordX, eventCoordY);
 		}
 		break;
@@ -67,10 +71,6 @@ int ModelerView::handle(int event)
           //  printf("release %d %d\n", eventCoordX, eventCoordY);
 		}
 		break;
-	case FL_MOUSEWHEEL:
-		{
-			m_camera->clickMouse(kActionTwist, eventCoordX, eventCoordY);
-		}
 	default:
 		return 0;
 	}

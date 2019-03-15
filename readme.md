@@ -23,7 +23,7 @@ B: Bell, W: Whistle, 1B=2W
 - [ ] **(1B)** Animated sequence
 - [ ] (1B) Widget to control param and create individual-looking instances
 - [x] **(1B)** Fit whole model in camera (Frame All)
-- [ ] (1B1W) an intuitive way for the user to twist the camera via mouse control.
+- [x] (1B1W) an intuitive way for the user to twist the camera via mouse control.
 - [ ] *(2B)* New primitives (is it 2B for each)
   - [ ] 1. Given Curve A and B, surface form by sweep A through B
   - [ ] 2. Given Curve A and stright line L, surface form by rotate A about L
