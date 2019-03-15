@@ -1,4 +1,5 @@
 #include "MyModel.h"
+#include "modelerapp.h"
 
 
 // We are going to override (is that the right word?) the draw()
@@ -9,6 +10,27 @@ void MyModel::draw()
 	// matrix stuff.  Unless you want to fudge directly with the 
 	// projection matrix, don't bother with this ...
 	ModelerView::draw();
+
+	bool flag = isAnimating();
+
+	if(flag || isAnimating())
+	{
+		if(VAL(CYCLINGMOOD))
+		{
+			if(moodUp)
+			{
+				moodTick++;
+			}else
+			{
+				moodTick--;
+			}
+			if(moodTick==maxMoodTick-1 || moodTick==0)
+			{
+				moodUp = !moodUp;
+			}
+		}
+		animTick = (animTick + 1) % maxAnimTick;
+	}
 
 	glEnable(GL_LIGHTING);
 	GLfloat lightPosition0[4];
@@ -72,7 +94,7 @@ void MyModel::drawArm(int levels, int curDept)
 
 	glPushMatrix();
 		// set vertical axis rotation
-		glRotated(VAL(ARM1V + curDept*2), 0, 1, 0);
+		glRotated(VAL(ARM1V + curDept*2)+moodTick, 0, 1, 0);
 
 		//vertical arm cylinder
 		glPushMatrix();
@@ -82,7 +104,7 @@ void MyModel::drawArm(int levels, int curDept)
 
 		//joint cylinder
 		glTranslated(0, 2, 0);
-		glRotated(VAL(ARM1H + curDept * 2), 0, 0, 1);
+		glRotated(VAL(ARM1H + curDept * 2)+moodTick, 0, 0, 1);
 
 		glPushMatrix();
 		glTranslated(0, 0, -0.5);
@@ -98,11 +120,21 @@ void MyModel::drawArm(int levels, int curDept)
 	glPopMatrix();
 }
 
+double rad(double deg)
+{
+	return deg * M_PI / 180.f;
+}
+
 void MyModel::drawClamp()
 {
 	// const double palmThickness = 0.2;
 	const double fingerThickness = 0.2;
 	const double fingerLength = 0.5;
+
+	if(isAnimating())
+	{
+		ModelerApplication::Instance()->SetControlValue(CLAMPWIDTH, sin(rad(animTick)) / 2.f + 0.5);
+	}
 
 	glPushMatrix();
 		glTranslated(0, 0, 0);

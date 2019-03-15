@@ -41,6 +41,7 @@ int main()
 	controls[LIGHTY] = ModelerControl("Light Y", -30, 30, 0.1, 12);
 	controls[LIGHTZ] = ModelerControl("Light Z", -30, 30, 0.1, 20);
 	controls[LEVELDETAILS] = ModelerControl("Level of Details", 0, 10, 1, 10);
+	controls[CYCLINGMOOD] = ModelerControl("Cycling Mood", 0, 1, 1, 0);
 
 	ModelerApplication::Instance()->Init(&createSampleModel, controls, NUMCONTROLS);
 	return ModelerApplication::Instance()->Run();
