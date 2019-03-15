@@ -43,6 +43,8 @@ int main()
 	controls[LEVELDETAILS] = ModelerControl("Level of Details", 0, 10, 1, 10);
 	controls[ENABLEANIM] = ModelerControl("Enable Anim", 0, 1, 1, 0);
 	controls[CYCLINGMOOD] = ModelerControl("Cycling Mood", 0, 1, 1, 0);
+	controls[LDISP] = ModelerControl("Cycling Mood", 0, 1, 1, 0);
+	controls[LDEPTH] = ModelerControl("Cycling Mood", 0, 1, 1, 0);
 
 	ModelerApplication::Instance()->Init(&createSampleModel, controls, NUMCONTROLS);
 	return ModelerApplication::Instance()->Run();
