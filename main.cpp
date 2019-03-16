@@ -8,6 +8,7 @@
 
 #include "MyModel.h"
 #include "sample.h"
+#include "Test.h"
 
 // We need to make a creator function, mostly because of
 // nasty API stuff that we'd rather stay away from.
@@ -17,8 +18,18 @@ ModelerView* createSampleModel(int x, int y, int w, int h, char *label)
 	return new MyModel(x, y, w, h, label);
 }
 
+std::stringstream ss;
+
 int main()
 {
+	// Test test(ss);
+	// test.testForward();
+	// test.testBackward();
+	//
+	// OutputDebugString(ss.str().c_str());
+	//
+	// return 0;
+
 	initTextures();
 
 	// Initialize the controls
@@ -50,7 +61,18 @@ int main()
 	controls[LTHICKNESS] = ModelerControl("Lsystem: thickness", 0.01, 1, 0.01, 0.1);
 	controls[LDECAY] = ModelerControl("Lsystem: decay", 0.01, 1, 0.01, 1);
 	controls[BALLJOINTS] = ModelerControl("Ball joints", 0, 1,1, 0);
+	controls[IKENABLE] = ModelerControl("IK: enable", 0, 1,1, 1);
+	controls[IKX] = ModelerControl("IK: X", -10, 10,0.01, 3);
+	controls[IKY] = ModelerControl("IK: Y", -10, 10,0.01, 3);
+	controls[IKZ] = ModelerControl("IK: Z", -10, 10,0.01, 3);
+	controls[IKMIN] = ModelerControl("IK: Min", -180, 180,1, -90);
+	controls[IKMAX] = ModelerControl("IK: Max", -180, 180,1, 90);
 
 	ModelerApplication::Instance()->Init(&createSampleModel, controls, NUMCONTROLS);
 	return ModelerApplication::Instance()->Run();
+}
+
+double rad(double deg)
+{
+	return deg * M_PI / 180.f;
 }

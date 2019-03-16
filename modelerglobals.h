@@ -18,7 +18,8 @@ enum SampleModelControls
 	LIGHTX, LIGHTY, LIGHTZ, LEVELDETAILS, 
 	ENABLEANIM, CYCLINGMOOD,
 	LDISP, LDEPTH, LANGLE, LLEN, LTHICKNESS, LDECAY, 
-	BALLJOINTS, NUMCONTROLS
+	BALLJOINTS,
+	IKENABLE, IKX, IKY, IKZ, IKMIN, IKMAX, NUMCONTROLS
 };
 
 // Colors
@@ -29,5 +30,6 @@ enum SampleModelControls
 // We'll be getting the instance of the application a lot; 
 // might as well have it as a macro.
 #define VAL(x) (ModelerApplication::Instance()->GetControlValue(x))
+#define SET(x,value) (ModelerApplication::Instance()->SetControlValue(x,value))
 
 #endif

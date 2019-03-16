@@ -32,5 +32,6 @@ B: Bell, W: Whistle, 1B=2W
 - [x] (2B) procedural modelling with parameter control [L-system](https://en.wikipedia.org/wiki/L-system)
 - [x] (2B) mood cycling: the model have mood reaction based on UI control
 - [ ] (4B) Organic shape [metaballs](http://en.wikipedia.org/wiki/Metaballs)
-- [ ] *(8B)* goal-oriented motion (inverse kinematics  [here](https://course.cse.ust.hk/comp4411/Password_Only/projects/modeler/inverse-kinematics.pdf))
-  - [ ] *(4B)* constrain on joints
+- [x] *(8B)* goal-oriented motion (inverse kinematics  [here](https://course.cse.ust.hk/comp4411/Password_Only/projects/modeler/inverse-kinematics.pdf))
+  - [x] *(4B)* constrain on joints
+
