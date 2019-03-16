@@ -52,8 +52,8 @@ int main()
 	controls[LIGHTY] = ModelerControl("Light Y", -30, 30, 0.1, 12);
 	controls[LIGHTZ] = ModelerControl("Light Z", -30, 30, 0.1, 20);
 	controls[LEVELDETAILS] = ModelerControl("Level of Details", 0, 10, 1, 10);
-	controls[ENABLEANIM] = ModelerControl("Enable Anim", 0, 1, 1, 0);
-	controls[CYCLINGMOOD] = ModelerControl("Cycling Mood", 0, 1, 1, 0);
+	controls[ENABLEANIM] = ModelerControl("Enable Anim", 0, 1, 1, 1);
+	controls[CYCLINGMOOD] = ModelerControl("Cycling Mood", 0, 2, 1, 2);
 	controls[LDISP] = ModelerControl("Lsystem: display", 0, 1, 1, 0);
 	controls[LDEPTH] = ModelerControl("Lsystem: depth", 1, 6, 1, 4);
 	controls[LANGLE] = ModelerControl("Lsystem: angle", 0, 360, 1, 30);
@@ -61,7 +61,7 @@ int main()
 	controls[LTHICKNESS] = ModelerControl("Lsystem: thickness", 0.01, 1, 0.01, 0.1);
 	controls[LDECAY] = ModelerControl("Lsystem: decay", 0.01, 1, 0.01, 1);
 	controls[BALLJOINTS] = ModelerControl("Ball joints", 0, 1,1, 0);
-	controls[IKENABLE] = ModelerControl("IK: enable", 0, 1,1, 1);
+	controls[IKENABLE] = ModelerControl("IK: enable", 0, 1,1, 0);
 	controls[IKX] = ModelerControl("IK: X", -10, 10,0.01, 3);
 	controls[IKY] = ModelerControl("IK: Y", -10, 10,0.01, 3);
 	controls[IKZ] = ModelerControl("IK: Z", -10, 10,0.01, 3);

@@ -154,6 +154,7 @@ void MyModel::draw()
 
 void MyModel::drawArm(int levels, int curDept)
 {
+	double mood = VAL(CYCLINGMOOD);
 	if(levels == 0)
 	{
 		if(VAL(LEVELDETAILS) > 1 + curDept)
@@ -165,8 +166,10 @@ void MyModel::drawArm(int levels, int curDept)
 
 	glPushMatrix();
 		// set vertical axis rotation
-		glRotated(VAL(ARM1V + curDept*2)+moodTick, 0, 1, 0);
+		glRotated(VAL(ARM1V + curDept*2)+(mood==1)*moodTick, 0, 1, 0);
 
+		if (mood == 2)
+			glTranslated(levels*sin(32 * rad(levels*moodTick)) / 1000.f, 0, levels*cos(32 * rad(levels*moodTick)) / 1000.f);
 		//vertical arm cylinder
 		glPushMatrix();
 			glRotated(-90, 1, 0, 0);
@@ -175,7 +178,7 @@ void MyModel::drawArm(int levels, int curDept)
 
 		//joint cylinder
 		glTranslated(0, 2, 0);
-		glRotated(VAL(ARM1H + curDept * 2)+moodTick, 0, 0, 1);
+		glRotated(VAL(ARM1H + curDept * 2)+(mood==1)*moodTick, 0, 0, 1);
 
 		glPushMatrix();
 		if(VAL(BALLJOINTS))
