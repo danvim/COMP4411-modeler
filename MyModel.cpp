@@ -101,9 +101,11 @@ void MyModel::draw()
 		drawSphere(0.5);
 		glPopMatrix();
 
-		std::vector<double> angles{ VAL(ARM1V),VAL(ARM1H),VAL(ARM2V),VAL(ARM2H),VAL(ARM3V),VAL(ARM3H) };
+		std::vector<double> angles{ 0,0,0,0,0,0 };
 		IkSolver ik;
 		ik.baseHeight = VAL(HEIGHT);
+		ik.minangle = VAL(IKMIN);
+		ik.maxangle= VAL(IKMAX);
 		Vector3d target(VAL(IKX), VAL(IKY), -VAL(IKZ));
 		ik.solve(angles, target);
 		for(int i=0;i<angles.size();i++)

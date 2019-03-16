@@ -21,5 +21,7 @@ public:
 
 	double baseHeight = 1;
 	double armLen = 2;
+	double minangle = -180;
+	double maxangle = 180;
 };
 

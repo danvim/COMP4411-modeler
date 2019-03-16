@@ -120,7 +120,11 @@ void IkSolver::solve(vector<double>& angles, Vector3d target, int maxIter,double
 		}
 		for(int j=0; j<angles.size(); j++)
 		{
-			angles[j] -= lr * grad[j];
+			double newangle = angles[j] - lr * grad[j];
+			if(newangle >= minangle && newangle <= maxangle)
+			{
+				angles[j] = newangle;
+			}
 		}
 
 		Vector3d currPos = computePosition(angles);

@@ -65,6 +65,8 @@ int main()
 	controls[IKX] = ModelerControl("IK: X", -10, 10,0.01, 3);
 	controls[IKY] = ModelerControl("IK: Y", -10, 10,0.01, 3);
 	controls[IKZ] = ModelerControl("IK: Z", -10, 10,0.01, 3);
+	controls[IKMIN] = ModelerControl("IK: Min", -180, 180,1, -90);
+	controls[IKMAX] = ModelerControl("IK: Max", -180, 180,1, 90);
 
 	ModelerApplication::Instance()->Init(&createSampleModel, controls, NUMCONTROLS);
 	return ModelerApplication::Instance()->Run();
