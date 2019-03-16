@@ -10,7 +10,7 @@ bool MyModel::isAnimating() {
 	return ModelerApplication::Instance()->GetAnimating(); 
 }
 
-void MyModel::drawLsystem(int systype, int branchtype, int depth, float length, int angle,double thickness,double decay)
+void MyModel::drawLsystem(int systype, int branchtype, int depth, float length, int angle,double thickness,double decayThickness, double decayLength)
 {
 	if(depth == 0)
 	{
@@ -18,13 +18,44 @@ void MyModel::drawLsystem(int systype, int branchtype, int depth, float length, 
 	}
 	switch(systype)
 	{
+	case 2:
+		glPushMatrix();
+
+
+		glPushMatrix();
+		glRotated(-90, 1, 0, 0);
+		drawCylinder(length, thickness, thickness*decayThickness);
+		glPopMatrix();
+
+		glRotated(angle, 0, 1, 0);
+
+		if(branchtype == 1)
+		{
+			glPushMatrix();
+			glTranslated(0, length, 0);
+			glRotated(-angle, 0, 0, 1);
+			drawLsystem(systype, 0, depth - 1, length*decayLength, angle, thickness*decayThickness, decayThickness, decayLength);
+			glPopMatrix();
+		}
+
+		glRotated(angle, 0, 1, 0);
+
+		glPushMatrix();
+		glTranslated(0, length, 0);
+		glRotated(angle, 0, 0, 1);
+		drawLsystem(systype, 1, depth - 1, length*decayThickness, angle, thickness*decayThickness, decayThickness, decayLength);
+		glPopMatrix();
+
+		glPopMatrix();
+		break;
+
 	default:
 		glPushMatrix();
 
 
 		glPushMatrix();
 		glRotated(-90, 1, 0, 0);
-		drawCylinder(length, thickness, thickness*decay);
+		drawCylinder(length, thickness, thickness*decayThickness);
 		glPopMatrix();
 
 		glRotated(angle, 0, 1, 0);
@@ -32,7 +63,7 @@ void MyModel::drawLsystem(int systype, int branchtype, int depth, float length, 
 		glPushMatrix();
 		glTranslated(0, length, 0);
 		glRotated(-angle, 0, 0, 1);
-		drawLsystem(systype, 0, depth - 1, length*decay, angle,thickness*decay,decay);
+		drawLsystem(systype, 0, depth - 1, length*decayLength, angle,thickness*decayThickness,decayThickness,decayLength);
 		glPopMatrix();
 
 		glRotated(angle, 0, 1, 0);
@@ -40,7 +71,7 @@ void MyModel::drawLsystem(int systype, int branchtype, int depth, float length, 
 		glPushMatrix();
 		glTranslated(0, length, 0);
 		glRotated(angle, 0, 0, 1);
-		drawLsystem(systype, 0, depth - 1, length*decay, angle,thickness*decay,decay);
+		drawLsystem(systype, 0, depth - 1, length*decayThickness, angle,thickness*decayThickness,decayThickness,decayLength);
 		glPopMatrix();
 
 		glPopMatrix();
@@ -126,7 +157,7 @@ void MyModel::draw()
 	//base
 	if(VAL(LDISP))
 	{
-		drawLsystem(VAL(LDISP), 0, VAL(LDEPTH), VAL(LLEN), VAL(LANGLE),VAL(LTHICKNESS),VAL(LDECAY));
+		drawLsystem(VAL(LDISP), 0, VAL(LDEPTH), VAL(LLEN), VAL(LANGLE),VAL(LTHICKNESS),VAL(LDECAYTHICKNESS),VAL(LDECAYLENGTH));
 		return;
 	}
 	if(VAL(LEVELDETAILS)>0)
