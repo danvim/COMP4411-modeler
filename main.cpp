@@ -24,6 +24,7 @@ int main()
 {
 	Test test(ss);
 	test.testForward();
+	test.testBackward();
 	
 	OutputDebugString(ss.str().c_str());
 	

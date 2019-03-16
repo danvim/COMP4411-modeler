@@ -12,4 +12,5 @@ public:
 	~Test();
 
 	void testForward();
+	void testBackward();
 };
