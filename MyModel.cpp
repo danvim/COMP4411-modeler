@@ -203,8 +203,15 @@ void MyModel::drawArm(int levels, int curDept)
 			glTranslated(levels*sin(32 * rad(levels*moodTick)) / 1000.f, 0, levels*cos(32 * rad(levels*moodTick)) / 1000.f);
 		//vertical arm cylinder
 		glPushMatrix();
-			glRotated(-90, 1, 0, 0);
-			drawCylinder(2, 1, 1);
+	if(VAL(BOXARMS)==0)
+	{
+		glRotated(-90, 1, 0, 0);
+		drawCylinder(2, 1, 1);
+	}else
+	{
+		glTranslated(-1, 0, -0.5);
+		drawBox(2, 2, 1);
+	}
 		glPopMatrix();
 
 		//joint cylinder
