@@ -1,6 +1,7 @@
 #include "MyModel.h"
 #include "modelerapp.h"
 
+extern double rad(double deg);
 
 bool MyModel::isAnimating() {
 	//return true;
@@ -90,6 +91,15 @@ void MyModel::draw()
 	drawBox(10, 0.01f, 10);
 	glPopMatrix();
 
+	// draw ik target point
+	if(VAL(IKENABLE))
+	{
+		glPushMatrix();
+		glTranslated(VAL(IKX), VAL(IKY), VAL(IKZ));
+		drawSphere(0.5);
+		glPopMatrix();
+	}
+
 	// draw the model
 	setAmbientColor(.1f, .1f, .1f);
 	setDiffuseColor(COLOR_GREEN);
@@ -171,11 +181,6 @@ void MyModel::drawArm(int levels, int curDept)
 		}
 
 	glPopMatrix();
-}
-
-double rad(double deg)
-{
-	return deg * M_PI / 180.f;
 }
 
 void MyModel::drawClamp()
