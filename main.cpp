@@ -22,13 +22,13 @@ std::stringstream ss;
 
 int main()
 {
-	Test test(ss);
-	test.testForward();
-	test.testBackward();
-	
-	OutputDebugString(ss.str().c_str());
-	
-	return 0;
+	// Test test(ss);
+	// test.testForward();
+	// test.testBackward();
+	//
+	// OutputDebugString(ss.str().c_str());
+	//
+	// return 0;
 
 	initTextures();
 

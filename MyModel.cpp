@@ -1,5 +1,7 @@
 #include "MyModel.h"
 #include "modelerapp.h"
+#include <vector>
+#include "IkSolver.h"
 
 extern double rad(double deg);
 
@@ -98,6 +100,16 @@ void MyModel::draw()
 		glTranslated(VAL(IKX), VAL(IKY), VAL(IKZ));
 		drawSphere(0.5);
 		glPopMatrix();
+
+		std::vector<double> angles{ VAL(ARM1V),VAL(ARM1H),VAL(ARM2V),VAL(ARM2H),VAL(ARM3V),VAL(ARM3H) };
+		IkSolver ik;
+		ik.baseHeight = VAL(HEIGHT);
+		Vector3d target(VAL(IKX), VAL(IKY), -VAL(IKZ));
+		ik.solve(angles, target);
+		for(int i=0;i<angles.size();i++)
+		{
+			SET(ARM1V + i, angles[i]);
+		}
 	}
 
 	// draw the model
