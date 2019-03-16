@@ -16,6 +16,8 @@ public:
 	double loss(Vector3d computed, Vector3d target) { return Vector3d(computed - target).norm(); }
 	Vector3d computeLocation(vector<pair<double, double>> angles, double armLen = 2);
 	Vector3d rotateVector(Vector3d& vec, double degree, char axis);
+	Matrix4d rotateMatrix(double degree, char axis);
+	Matrix4d translateMatrix(double x, double y, double z);
 
 	double baseHeight;
 };

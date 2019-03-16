@@ -18,14 +18,15 @@ ModelerView* createSampleModel(int x, int y, int w, int h, char *label)
 	return new MyModel(x, y, w, h, label);
 }
 
+std::stringstream ss;
+
 int main()
 {
-	std::stringstream ss;
 	Test test(ss);
 	test.testForward();
-
+	
 	OutputDebugString(ss.str().c_str());
-
+	
 	return 0;
 
 	initTextures();
@@ -60,9 +61,9 @@ int main()
 	controls[LDECAY] = ModelerControl("Lsystem: decay", 0.01, 1, 0.01, 1);
 	controls[BALLJOINTS] = ModelerControl("Ball joints", 0, 1,1, 0);
 	controls[IKENABLE] = ModelerControl("IK: enable", 0, 1,1, 1);
-	controls[IKX] = ModelerControl("IK: X", 0, 10,0.01, 3);
-	controls[IKY] = ModelerControl("IK: Y", 0, 10,0.01, 3);
-	controls[IKZ] = ModelerControl("IK: Z", 0, 10,0.01, 3);
+	controls[IKX] = ModelerControl("IK: X", -10, 10,0.01, 3);
+	controls[IKY] = ModelerControl("IK: Y", -10, 10,0.01, 3);
+	controls[IKZ] = ModelerControl("IK: Z", -10, 10,0.01, 3);
 
 	ModelerApplication::Instance()->Init(&createSampleModel, controls, NUMCONTROLS);
 	return ModelerApplication::Instance()->Run();
