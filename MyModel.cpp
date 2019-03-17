@@ -265,6 +265,7 @@ void MyModel::drawClamp()
 			glPushMatrix();
 				glTranslated(VAL(CLAMPWIDTH) , 0, -0.5);
 				drawBox(fingerThickness, fingerLength, 1);
+				drawLathe({ {0.0, 1.0}, {1.0, 2.0}, {1.2, 2}, {0.1, 0.9}, {0.1, 0.1}, {1.0, 0.0}, {0.0, 0.0} }, 32);
 			glPopMatrix();
 		glPopMatrix();
 	glPopMatrix();

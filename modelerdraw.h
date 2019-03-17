@@ -10,6 +10,7 @@
 #include <cstdio>
 
 #include "modelerglobals.h"
+#include <vector>
 
 using namespace Eigen;
 
@@ -91,6 +92,8 @@ void drawTextureBox( double x, double y, double z );
 // Draw a cylinder from z=0 to z=h with radius r1 at origin and r2 at z=h
 void drawCylinder( double h, double r1, double r2 );
 void drawTextureCylinder( double h, double r1, double r2 );
+
+void drawLathe(const std::vector<std::pair<double, double>>& xyPositions, unsigned int divisions);
 
 void drawTriangularColumn(double h, double l1, double l2, double l3);
 
