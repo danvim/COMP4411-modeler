@@ -407,8 +407,24 @@ void drawTextureCylinder(double h, double r1, double r2)
 	glDisable(GL_TEXTURE_2D);
 }
 
-void drawLathe(const std::vector<std::pair<double, double>>& xyPositions, const unsigned int divisions)
+void drawLathe(const std::vector<std::pair<double, double>>& xyPositions)
 {
+	auto* mds = ModelerDrawState::Instance();
+
+	auto divisions = 0u;
+
+	switch (mds->m_quality)
+	{
+	case HIGH:
+		divisions = 64; break;
+	case MEDIUM:
+		divisions = 32; break;
+	case LOW:
+		divisions = 16; break;
+	case POOR:
+		divisions = 8; break;
+	}
+
 	const auto rotateYDivisions = [&](const unsigned int i) {return AngleAxisd(2 * M_PI / divisions * i, Vector3d::UnitY()); };
 
 	// Calculate the rotations of each points and generate vertices in bands.
@@ -442,6 +458,8 @@ void drawLathe(const std::vector<std::pair<double, double>>& xyPositions, const 
 	std::vector<GLdouble> glVertices;  // array of triangles with groups of 3 numbers defining x, y, z positions
 	std::vector<GLdouble> glNormals;  // array of triangles with groups of 3 numbers defining x, y, z normals
 
+	static const auto EPSILON = 1.0e-4;
+
 	const auto ravelPush = [](std::vector<GLdouble>& a, Vector3d v)
 	{
 		a.push_back(v[0]);
@@ -459,22 +477,28 @@ void drawLathe(const std::vector<std::pair<double, double>>& xyPositions, const 
 			const auto br = bands[i][d];
 
 			// A
-			ravelPush(glVertices, tl);
-			ravelPush(glVertices, tr);
-			ravelPush(glVertices, bl);
-			const auto normalA = (tr - bl).cross(tl - bl);
-			ravelPush(glNormals, normalA);
-			ravelPush(glNormals, normalA);
-			ravelPush(glNormals, normalA);
+			auto normalA = (tr - bl).cross(tl - bl);
+			if (normalA.norm() > EPSILON) {
+				normalA.normalize();
+				ravelPush(glVertices, tl);
+				ravelPush(glVertices, tr);
+				ravelPush(glVertices, bl);
+				ravelPush(glNormals, normalA);
+				ravelPush(glNormals, normalA);
+				ravelPush(glNormals, normalA);
+			}
 
 			// B
-			ravelPush(glVertices, tr);
-			ravelPush(glVertices, br);
-			ravelPush(glVertices, bl);
-			const auto normalB = (br - bl).cross(tr - bl);
-			ravelPush(glNormals, normalB);
-			ravelPush(glNormals, normalB);
-			ravelPush(glNormals, normalB);
+			auto normalB = (br - bl).cross(tr - bl);
+			if (normalB.norm() > EPSILON) {
+				normalB.normalize();
+				ravelPush(glVertices, tr);
+				ravelPush(glVertices, br);
+				ravelPush(glVertices, bl);
+				ravelPush(glNormals, normalB);
+				ravelPush(glNormals, normalB);
+				ravelPush(glNormals, normalB);
+			}
 		}
 	}
 

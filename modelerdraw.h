@@ -93,7 +93,7 @@ void drawTextureBox( double x, double y, double z );
 void drawCylinder( double h, double r1, double r2 );
 void drawTextureCylinder( double h, double r1, double r2 );
 
-void drawLathe(const std::vector<std::pair<double, double>>& xyPositions, unsigned int divisions);
+void drawLathe(const std::vector<std::pair<double, double>>& xyPositions);
 
 void drawTriangularColumn(double h, double l1, double l2, double l3);
 

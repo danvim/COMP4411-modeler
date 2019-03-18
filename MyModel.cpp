@@ -124,9 +124,16 @@ void MyModel::draw()
 	drawBox(10, 0.01f, 10);
 	glPopMatrix();
 
+	glPushMatrix();
+	setDiffuseColor(0.5f, 0.9f, 0.9f);
+	glTranslated(-4, 0.001, -4);
+	drawLathe({ {0.0, 1.0}, {1.0, 2.0}, {1.2, 2}, {0.1, 0.9}, {0.1, 0.1}, {1.0, 0.0}, {0.0, 0.0} });
+	glPopMatrix();
+
 	// draw ik target point
 	if(VAL(IKENABLE))
 	{
+		setDiffuseColor(COLOR_RED);
 		glPushMatrix();
 		glTranslated(VAL(IKX), VAL(IKY), VAL(IKZ));
 		drawSphere(0.5);
@@ -152,7 +159,7 @@ void MyModel::draw()
 	// drawTest();
 
 	glPushMatrix();
-	glTranslated(VAL(XPOS), VAL(YPOS), VAL(ZPOS));
+	glTranslated(VAL(XPOS), VAL(YPOS) + 0.001f, VAL(ZPOS));
 
 	//base
 	if(VAL(LDISP))
@@ -265,7 +272,6 @@ void MyModel::drawClamp()
 			glPushMatrix();
 				glTranslated(VAL(CLAMPWIDTH) , 0, -0.5);
 				drawBox(fingerThickness, fingerLength, 1);
-				drawLathe({ {0.0, 1.0}, {1.0, 2.0}, {1.2, 2}, {0.1, 0.9}, {0.1, 0.1}, {1.0, 0.0}, {0.0, 0.0} }, 32);
 			glPopMatrix();
 		glPopMatrix();
 	glPopMatrix();
