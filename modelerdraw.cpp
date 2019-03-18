@@ -407,6 +407,110 @@ void drawTextureCylinder(double h, double r1, double r2)
 	glDisable(GL_TEXTURE_2D);
 }
 
+void drawLathe(const std::vector<std::pair<double, double>>& xyPositions)
+{
+	auto* mds = ModelerDrawState::Instance();
+
+	auto divisions = 0u;
+
+	switch (mds->m_quality)
+	{
+	case HIGH:
+		divisions = 64; break;
+	case MEDIUM:
+		divisions = 32; break;
+	case LOW:
+		divisions = 16; break;
+	case POOR:
+		divisions = 8; break;
+	}
+
+	const auto rotateYDivisions = [&](const unsigned int i) {return AngleAxisd(2 * M_PI / divisions * i, Vector3d::UnitY()); };
+
+	// Calculate the rotations of each points and generate vertices in bands.
+	std::vector<std::vector<Vector3d>> bands;
+
+	for (auto& pair : xyPositions)
+	{
+		std::vector<Vector3d> band;
+		const auto [x, y] = pair;
+		Vector3d referencePoint(x, y, 0.0);
+
+		//Rotate this point around y axis
+		for (auto i = 0u; i <= divisions; i++)
+		{
+			band.push_back(rotateYDivisions(i) * referencePoint);
+		}
+		bands.push_back(band);
+	}
+
+	/*
+	 *   +-------+
+	 *   | A   / |
+	 *   |   /   |  // Face
+	 *   | /   B |
+	 *   +-------+
+	 *
+	 *	A trig has top 2 points from band i-1        bands[i-1][d-1]    bands[i-1][d] 
+	 *	B trig has bottom 2 points from band i       bands[i][d-1]      bands[i][d] 
+	 */
+
+	std::vector<GLdouble> glVertices;  // array of triangles with groups of 3 numbers defining x, y, z positions
+	std::vector<GLdouble> glNormals;  // array of triangles with groups of 3 numbers defining x, y, z normals
+
+	static const auto EPSILON = 1.0e-4;
+
+	const auto ravelPush = [](std::vector<GLdouble>& a, Vector3d v)
+	{
+		a.push_back(v[0]);
+		a.push_back(v[1]);
+		a.push_back(v[2]);
+	};
+
+	for (auto i = 1u; i < bands.size(); i++)
+	{
+		for (auto d = 1u; d <= divisions; d++)
+		{
+			const auto tl = bands[i - 1][d - 1];
+			const auto tr = bands[i - 1][d];
+			const auto bl = bands[i][d - 1];
+			const auto br = bands[i][d];
+
+			// A
+			auto normalA = (tr - bl).cross(tl - bl);
+			if (normalA.norm() > EPSILON) {
+				normalA.normalize();
+				ravelPush(glVertices, tl);
+				ravelPush(glVertices, tr);
+				ravelPush(glVertices, bl);
+				ravelPush(glNormals, normalA);
+				ravelPush(glNormals, normalA);
+				ravelPush(glNormals, normalA);
+			}
+
+			// B
+			auto normalB = (br - bl).cross(tr - bl);
+			if (normalB.norm() > EPSILON) {
+				normalB.normalize();
+				ravelPush(glVertices, tr);
+				ravelPush(glVertices, br);
+				ravelPush(glVertices, bl);
+				ravelPush(glNormals, normalB);
+				ravelPush(glNormals, normalB);
+				ravelPush(glNormals, normalB);
+			}
+		}
+	}
+
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_NORMAL_ARRAY);
+	glVertexPointer(3, GL_DOUBLE, 0, &glVertices[0]);
+	glNormalPointer(GL_DOUBLE, 0, &glNormals[0]);
+	glDrawArrays(GL_TRIANGLES, 0, glVertices.size() / 3);
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_NORMAL_ARRAY);
+}
+
 void drawTriangularColumn(double h, double l1, double l2, double l3)
 {
 	Vector3d origin(0, 0, 0);
