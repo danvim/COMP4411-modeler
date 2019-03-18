@@ -51,6 +51,7 @@ int main()
 	controls[LIGHTX] = ModelerControl("Light X", -30, 30, 0.1, -20);
 	controls[LIGHTY] = ModelerControl("Light Y", -30, 30, 0.1, 12);
 	controls[LIGHTZ] = ModelerControl("Light Z", -30, 30, 0.1, 20);
+	controls[LIGHT_3_PT] = ModelerControl("Enable 3 Point Lighting", 0, 1, 1, 0);
 	controls[LEVELDETAILS] = ModelerControl("Level of Details", 0, 10, 1, 10);
 	controls[ENABLEANIM] = ModelerControl("Enable Anim", 0, 1, 1, 0);
 	controls[CYCLINGMOOD] = ModelerControl("Cycling Mood", 0, 2, 1, 0);

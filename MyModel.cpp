@@ -116,6 +116,23 @@ void MyModel::draw()
 	lightPosition0[3] = 1;
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition0);
 
+	if (VAL(LIGHT_3_PT))
+	{
+		glEnable(GL_LIGHT2);
+		GLfloat lightPos0[] = { -26.8f, 30.f, 8.f, 1.f };
+		GLfloat lightPos1[] = { 14.5f, 0.8f, 15.5f, 1.f };
+		GLfloat lightPos2[] = { -1.8f, -7.3f, -14.7f, 1.f };
+		GLfloat lightIntensity0[] = { 1.f, 1.f, 1.f, 1.f };
+		GLfloat lightIntensity1[] = { 0.5f, 0.5f, 0.5f, 0.f };
+		GLfloat lightIntensity2[] = { .2f, .2f, .2f, .2f };
+		glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
+		glLightfv(GL_LIGHT1, GL_POSITION, lightPos1);
+		glLightfv(GL_LIGHT2, GL_POSITION, lightPos2);
+		glLightfv(GL_LIGHT0, GL_DIFFUSE, lightIntensity0);
+		glLightfv(GL_LIGHT1, GL_DIFFUSE, lightIntensity1);
+		glLightfv(GL_LIGHT2, GL_DIFFUSE, lightIntensity2);
+	}
+
 	// draw the floor
 	setAmbientColor(.1f, .1f, .1f);
 	setDiffuseColor(COLOR_RED);
@@ -127,7 +144,15 @@ void MyModel::draw()
 	glPushMatrix();
 	setDiffuseColor(0.5f, 0.9f, 0.9f);
 	glTranslated(-4, 0.001, -4);
-	drawLathe({ {0.0, 1.0}, {1.0, 2.0}, {1.2, 2}, {0.1, 0.9}, {0.1, 0.1}, {1.0, 0.0}, {0.0, 0.0} });
+	drawLathe({ {0.0, 1.0}, {1.0, 2.0}, {1.2, 2}, {0.1, 0.9}, {0.1, 0.1}, {1.0, 0.0}, {0.0, 0.0} }); //martini
+	glPopMatrix();
+
+	glPushMatrix();
+	setDiffuseColor(0.5f, 0.9f, 0.9f);
+	glTranslated(-4, 0.001, -1);
+	drawLathe({ {0, 0.96}, {0.5, 1}, {0.84, 1.3}, {0.83, 1.84}, {0.5, 2.6}, {0.6, 2.6}, {0.94, 1.84}, {0.94, 1.25}, {0.54, 0.91}, {0.1, 0.86}, {0.1, 0.1}, {1, 0}, {0,0} }); //wine glass
+	setDiffuseColor(0.4f, 0.f, 0.f);
+	drawLathe({ {0, 0.96}, {0.5, 1}, {0.84, 1.3}, {0.83, 1.84}, {0, 1.84}});
 	glPopMatrix();
 
 	// draw ik target point
