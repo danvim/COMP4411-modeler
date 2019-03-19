@@ -3,6 +3,7 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
+#include "modelerglobals.h"
 #include "vec.h"
 #include "mat.h"
 
@@ -70,13 +71,13 @@ public:
     inline Vec3f getLookAt() const
     { return mLookAt; }
 
-	inline void frameAll()
+	inline void frameAll(double e)
     {
 		mElevation = 6.7054;
 		mAzimuth = 2.7193;
-		mDolly = -30;
+		mDolly = -10*e;
 		mLookAt = Vec3<float>(0.5, 2, -0.5);
-		mPosition = Vec3<float>(-9.5, 15, 21.5);
+		mPosition = Vec3<float>(-3.5, 5, 7.5);
 		mDirtyTransform = true;
     }
     

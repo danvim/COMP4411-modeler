@@ -241,7 +241,7 @@ void ModelerUserInterface::cb_Focus(Fl_Menu_* o, void* v) {
 
 // Callback function to look at origin again.
 inline void ModelerUserInterface::cb_FrameAll_i(Fl_Menu_*, void*) {
-	m_modelerView->m_camera->frameAll();
+	m_modelerView->m_camera->frameAll(VAL(ARMCNT));
 	m_modelerView->redraw();
 }
 void ModelerUserInterface::cb_FrameAll(Fl_Menu_* o, void* v) {
