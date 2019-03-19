@@ -24,9 +24,9 @@ B: Bell, W: Whistle, 1B=2W
 - [x] (1B) Widget to control param and create individual-looking instances
 - [x] **(1B)** Fit whole model in camera (Frame All)
 - [x] (1B1W) an intuitive way for the user to twist the camera via mouse control.
-- [ ] *(2B)* New primitives (is it 2B for each)
+- [x] *(2B)* New primitives (is it 2B for each)
   - [ ] 1. Given Curve A and B, surface form by sweep A through B
-  - [ ] 2. Given Curve A and stright line L, surface form by rotate A about L
+  - [x] 2. Given Curve A and stright line L, surface form by rotate A about L
   - [ ] 3. Torus
     4. Others base on coolness
 - [x] (2B) procedural modelling with parameter control [L-system](https://en.wikipedia.org/wiki/L-system)

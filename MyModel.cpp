@@ -155,6 +155,10 @@ void MyModel::draw()
 	drawLathe({ {0, 0.96}, {0.5, 1}, {0.84, 1.3}, {0.83, 1.84}, {0, 1.84}});
 	glPopMatrix();
 
+	if (VAL(SHOWPRISM)) {
+		drawTest();
+	}
+
 	// draw ik target point
 	if(VAL(IKENABLE))
 	{
@@ -232,18 +236,19 @@ void MyModel::drawArm(int levels, int curDept)
 		glRotated(VAL(ARM1V + curDept*2)+(mood==1)*moodTick, 0, 1, 0);
 
 		if (mood == 2)
-			glTranslated(levels*sin(32 * rad(levels*moodTick)) / 1000.f, 0, levels*cos(32 * rad(levels*moodTick)) / 1000.f);
+			glTranslated(levels*sin(32 * rad(levels*moodTick)) / 100.f, 0, levels*cos(32 * rad(levels*moodTick)) / 100.f);
+		
 		//vertical arm cylinder
 		glPushMatrix();
-	if(VAL(BOXARMS)==0)
-	{
-		glRotated(-90, 1, 0, 0);
-		drawCylinder(2, 1, 1);
-	}else
-	{
-		glTranslated(-1, 0, -0.5);
-		drawBox(2, 2, 1);
-	}
+			if(VAL(BOXARMS)==0)
+			{
+				glRotated(-90, 1, 0, 0);
+				drawCylinder(2, 1, 1);
+			}else
+			{
+				glTranslated(-1, 0, -0.5);
+				drawBox(2, 2, 1);
+			}
 		glPopMatrix();
 
 		//joint cylinder
