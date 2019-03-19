@@ -51,6 +51,7 @@ int main()
 	controls[LIGHTX] = ModelerControl("Light X", -30, 30, 0.1, -20);
 	controls[LIGHTY] = ModelerControl("Light Y", -30, 30, 0.1, 12);
 	controls[LIGHTZ] = ModelerControl("Light Z", -30, 30, 0.1, 20);
+	controls[LIGHT_3_PT] = ModelerControl("Enable 3 Point Lighting", 0, 1, 1, 0);
 	controls[LEVELDETAILS] = ModelerControl("Level of Details", 0, 10, 1, 10);
 	controls[ENABLEANIM] = ModelerControl("Enable Anim", 0, 1, 1, 0);
 	controls[CYCLINGMOOD] = ModelerControl("Cycling Mood", 0, 2, 1, 0);
@@ -61,7 +62,7 @@ int main()
 	controls[LTHICKNESS] = ModelerControl("Lsystem: thickness", 0.01, 1, 0.01, 0.1);
 	controls[LDECAYTHICKNESS] = ModelerControl("Lsystem: decay thickness", 0.01, 10, 0.01, 1);
 	controls[LDECAYLENGTH] = ModelerControl("Lsystem: decay length", 0.01, 10, 0.01, 1);
-	controls[BALLJOINTS] = ModelerControl("Ball joints", 0, 1,1, 0);
+	controls[BALLJOINTS] = ModelerControl("Ball joints", 0, 1,1, 1);
 	controls[BOXARMS] = ModelerControl("Box Arms", 0, 1,1, 0);
 	controls[IKENABLE] = ModelerControl("IK: enable", 0, 1,1, 0);
 	controls[IKX] = ModelerControl("IK: X", -10, 10,0.01, 3);
@@ -69,6 +70,7 @@ int main()
 	controls[IKZ] = ModelerControl("IK: Z", -10, 10,0.01, 3);
 	controls[IKMIN] = ModelerControl("IK: Min", -180, 180,1, -90);
 	controls[IKMAX] = ModelerControl("IK: Max", -180, 180,1, 90);
+	controls[SHOWPRISM] = ModelerControl("Show Prism", 0, 1, 1, 0);
 
 	ModelerApplication::Instance()->Init(&createSampleModel, controls, NUMCONTROLS);
 	return ModelerApplication::Instance()->Run();
