@@ -169,7 +169,7 @@ void MyModel::draw()
 		drawSphere(0.5);
 		glPopMatrix();
 
-		std::vector<double> angles{ 0,0,0,0,0,0 };
+		std::vector<double> angles(2*(int)VAL(ARMCNT));
 		IkSolver ik;
 		ik.baseHeight = VAL(HEIGHT);
 		ik.minangle = VAL(IKMIN);
@@ -211,7 +211,7 @@ void MyModel::draw()
 		{
 			glPushMatrix();
 			glTranslated(0, VAL(HEIGHT), 0);
-			drawArm(3);
+			drawArm((int)VAL(ARMCNT));
 			glPopMatrix();
 		}
 	}

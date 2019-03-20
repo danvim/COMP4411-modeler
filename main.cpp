@@ -41,12 +41,14 @@ int main()
 	controls[ZPOS] = ModelerControl("Z Position", -5, 5, 0.1f, 0);
 	controls[HEIGHT] = ModelerControl("Height", 1, 2.5, 0.1f, 1);
 	controls[ROTATE] = ModelerControl("Rotate", -135, 135, 1, 0);
-	controls[ARM1V] = ModelerControl("Arm1 Vertical Axis Rotation", -180, 180, 1, 0);
-	controls[ARM1H] = ModelerControl("Arm1 Horizontal Axis Rotation", -90, 90, 1, 0);
-	controls[ARM2V] = ModelerControl("Arm2 Vertical Axis Rotation", -180, 180, 1, 0);
-	controls[ARM2H] = ModelerControl("Arm2 Horizontal Axis Rotation", -90, 90, 1, 0);
-	controls[ARM3V] = ModelerControl("Arm3 Vertical Axis Rotation", -180, 180, 1, 0);
-	controls[ARM3H] = ModelerControl("Arm3 Horizontal Axis Rotation", -90, 90, 1, 0);
+	controls[ARMCNT] = ModelerControl("Arm Amount", 3, 6, 1, 3);
+	char namebuf[20];
+	for (int i = 0; i < ARMMAXCNT; i++) {
+		sprintf(namebuf, "Arm %d Vertical Axis Rotation", i);
+		controls[ARM1V+2*i] = ModelerControl(namebuf, -180, 180, 1, 0);
+		sprintf(namebuf, "Arm %d Horizontal Axis Rotation", i);
+		controls[ARM1H+2*i] = ModelerControl(namebuf, -90, 90, 1, 0);
+	}
 	controls[CLAMPWIDTH] = ModelerControl("Clamp Width", 0, 1, 0.01, 0);
 	controls[LIGHTX] = ModelerControl("Light X", -30, 30, 0.1, -20);
 	controls[LIGHTY] = ModelerControl("Light Y", -30, 30, 0.1, 12);
@@ -66,9 +68,9 @@ int main()
 	controls[BOXARMS] = ModelerControl("Box Arms", 0, 1,1, 0);
 	controls[METABALL] = ModelerControl("Meta Ball Arms", 0, 1,1, 0);
 	controls[IKENABLE] = ModelerControl("IK: enable", 0, 1,1, 0);
-	controls[IKX] = ModelerControl("IK: X", -10, 10,0.01, 3);
-	controls[IKY] = ModelerControl("IK: Y", -10, 10,0.01, 3);
-	controls[IKZ] = ModelerControl("IK: Z", -10, 10,0.01, 3);
+	controls[IKX] = ModelerControl("IK: X", -20, 20,0.01, 3);
+	controls[IKY] = ModelerControl("IK: Y", -20, 20,0.01, 3);
+	controls[IKZ] = ModelerControl("IK: Z", -20, 20,0.01, 3);
 	controls[IKMIN] = ModelerControl("IK: Min", -180, 180,1, -90);
 	controls[IKMAX] = ModelerControl("IK: Max", -180, 180,1, 90);
 	controls[SHOWPRISM] = ModelerControl("Show Prism", 0, 1, 1, 0);

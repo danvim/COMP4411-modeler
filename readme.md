@@ -18,6 +18,8 @@ B: Bell, W: Whistle, 1B=2W
 
 - [x] **(1W)** Light source
   - [x] **(1W)** (hierarchical) level of details
+  - [X] (1W each) extra feature
+    - [x] Dynamic number of level of arms with ik supported
 - [x] **(1B)** Texture map
 - [x] **(1B)** Polygon faces shape
 - [x] **(1B)** Animated sequence

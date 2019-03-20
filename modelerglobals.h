@@ -14,7 +14,8 @@
 enum SampleModelControls
 { 
 	XPOS, YPOS, ZPOS, HEIGHT, ROTATE,
-	ARM1V, ARM1H, ARM2V, ARM2H, ARM3V, ARM3H, CLAMPWIDTH,
+	ARM1V, ARM1H, ARM2V, ARM2H, ARM3V, ARM3H, ARM4V, ARM4H, ARM5V, ARM5H, ARM6V, ARM6H,
+	CLAMPWIDTH, ARMCNT,
 	LIGHTX, LIGHTY, LIGHTZ, LIGHT_3_PT, LEVELDETAILS, 
 	ENABLEANIM, CYCLINGMOOD,
 	LDISP, LDEPTH, LANGLE, LLEN, LTHICKNESS, LDECAYTHICKNESS, LDECAYLENGTH, 
@@ -27,6 +28,7 @@ enum SampleModelControls
 #define COLOR_RED		1.0f, 0.0f, 0.0f
 #define COLOR_GREEN		0.0f, 1.0f, 0.0f
 #define COLOR_BLUE		0.0f, 0.0f, 1.0f
+#define ARMMAXCNT 6
 
 // We'll be getting the instance of the application a lot; 
 // might as well have it as a macro.
