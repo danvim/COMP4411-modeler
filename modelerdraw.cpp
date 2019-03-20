@@ -4,6 +4,7 @@
 #include <cstdio>
 #include <math.h>
 #include "bitmap.h"
+#include "GLUtils.h"
 
 
 int textureCheckerW, textureCheckerH;
@@ -458,15 +459,6 @@ void drawLathe(const std::vector<std::pair<double, double>>& xyPositions)
 	std::vector<GLdouble> glVertices;  // array of triangles with groups of 3 numbers defining x, y, z positions
 	std::vector<GLdouble> glNormals;  // array of triangles with groups of 3 numbers defining x, y, z normals
 
-	static const auto EPSILON = 1.0e-4;
-
-	const auto ravelPush = [](std::vector<GLdouble>& a, Vector3d v)
-	{
-		a.push_back(v[0]);
-		a.push_back(v[1]);
-		a.push_back(v[2]);
-	};
-
 	for (auto i = 1u; i < bands.size(); i++)
 	{
 		for (auto d = 1u; d <= divisions; d++)
@@ -476,29 +468,13 @@ void drawLathe(const std::vector<std::pair<double, double>>& xyPositions)
 			const auto bl = bands[i][d - 1];
 			const auto br = bands[i][d];
 
-			// A
-			auto normalA = (tr - bl).cross(tl - bl);
-			if (normalA.norm() > EPSILON) {
-				normalA.normalize();
-				ravelPush(glVertices, tl);
-				ravelPush(glVertices, tr);
-				ravelPush(glVertices, bl);
-				ravelPush(glNormals, normalA);
-				ravelPush(glNormals, normalA);
-				ravelPush(glNormals, normalA);
-			}
+			GLUtils::Triangle trigA = { tl, tr, bl };
+			GLUtils::Triangle trigB = { tr, br, bl };
 
+			// A
+			GLUtils::trigPush(glVertices, glNormals, trigA);
 			// B
-			auto normalB = (br - bl).cross(tr - bl);
-			if (normalB.norm() > EPSILON) {
-				normalB.normalize();
-				ravelPush(glVertices, tr);
-				ravelPush(glVertices, br);
-				ravelPush(glVertices, bl);
-				ravelPush(glNormals, normalB);
-				ravelPush(glNormals, normalB);
-				ravelPush(glNormals, normalB);
-			}
+			GLUtils::trigPush(glVertices, glNormals, trigB);
 		}
 	}
 

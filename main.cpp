@@ -66,6 +66,7 @@ int main()
 	controls[LDECAYLENGTH] = ModelerControl("Lsystem: decay length", 0.01, 10, 0.01, 1);
 	controls[BALLJOINTS] = ModelerControl("Ball joints", 0, 1,1, 1);
 	controls[BOXARMS] = ModelerControl("Box Arms", 0, 1,1, 0);
+	controls[METABALL] = ModelerControl("Meta Ball Arms", 0, 1,1, 0);
 	controls[IKENABLE] = ModelerControl("IK: enable", 0, 1,1, 0);
 	controls[IKX] = ModelerControl("IK: X", -20, 20,0.01, 3);
 	controls[IKY] = ModelerControl("IK: Y", -20, 20,0.01, 3);

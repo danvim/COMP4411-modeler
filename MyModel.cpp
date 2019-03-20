@@ -2,6 +2,7 @@
 #include "modelerapp.h"
 #include <vector>
 #include "IkSolver.h"
+#include "MetaBall.h"
 
 extern double rad(double deg);
 
@@ -151,8 +152,8 @@ void MyModel::draw()
 	setDiffuseColor(0.5f, 0.9f, 0.9f);
 	glTranslated(-4, 0.001, -1);
 	drawLathe({ {0, 0.96}, {0.5, 1}, {0.84, 1.3}, {0.83, 1.84}, {0.5, 2.6}, {0.6, 2.6}, {0.94, 1.84}, {0.94, 1.25}, {0.54, 0.91}, {0.1, 0.86}, {0.1, 0.1}, {1, 0}, {0,0} }); //wine glass
-	setDiffuseColor(0.4f, 0.f, 0.f);
-	drawLathe({ {0, 0.96}, {0.5, 1}, {0.84, 1.3}, {0.83, 1.84}, {0, 1.84}});
+	setDiffuseColor(0.2f, 0.f, 0.02f);
+	drawLathe({ {0, 1.84}, {0.83, 1.84}, {0.84, 1.3}, {0.5, 1}, {0, 0.96} }); //wine
 	glPopMatrix();
 
 	if (VAL(SHOWPRISM)) {
@@ -231,6 +232,25 @@ void MyModel::drawArm(int levels, int curDept)
 		return;
 	}
 
+	static auto* metaBallPtr = new MetaBall();
+	metaBallPtr->domainXMin = -3;
+	metaBallPtr->domainXMax = 3;
+	metaBallPtr->domainYMin = -3;
+	metaBallPtr->domainYMax = 5;
+	metaBallPtr->domainZMin = -3;
+	metaBallPtr->domainZMax = 3;
+	if (metaBallPtr->spheres.empty())
+	{
+		metaBallPtr->spheres.push_back({
+		{0, 0, 0},
+		1.0
+			});
+		metaBallPtr->spheres.push_back({
+		{0, 2, 0},
+		1.0
+		});
+	}
+
 	glPushMatrix();
 		// set vertical axis rotation
 		glRotated(VAL(ARM1V + curDept*2)+(mood==1)*moodTick, 0, 1, 0);
@@ -240,14 +260,19 @@ void MyModel::drawArm(int levels, int curDept)
 		
 		//vertical arm cylinder
 		glPushMatrix();
-			if(VAL(BOXARMS)==0)
+			if(VAL(BOXARMS)==0 && VAL(METABALL) == 0)
 			{
 				glRotated(-90, 1, 0, 0);
 				drawCylinder(2, 1, 1);
-			}else
+			}
+			else if (VAL(METABALL) == 0)
 			{
 				glTranslated(-1, 0, -0.5);
 				drawBox(2, 2, 1);
+			} else
+			{
+				//Meta-ball
+				metaBallPtr->drawMetaBalls();
 			}
 		glPopMatrix();
 
