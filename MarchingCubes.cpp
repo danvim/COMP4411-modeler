@@ -38,7 +38,7 @@ void MarchingCubes::polygonizeDraw(const Grid& grid, const double threshold)
 		const auto b = verticesOnEdges[TRI_TABLE[cubeIndex][i + 1]];
 		const auto c = verticesOnEdges[TRI_TABLE[cubeIndex][i + 2]];
 
-		auto normal = (a - b).cross(c - b);
+		auto normal = (a - b).cross(b - c);
 		if (normal.norm() > EPSILON) {
 			normal.normalize();
 			glBegin(GL_TRIANGLES);

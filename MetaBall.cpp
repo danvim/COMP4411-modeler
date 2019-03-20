@@ -23,22 +23,22 @@ double MetaBall::getIsoLevel(Vector3d pos)
 void MetaBall::initializeGrids()
 {
 	const auto gs = getGridSize();
-	const auto xSteps = unsigned int((DOMAIN_X_MAX - DOMAIN_X_MIN) / gs);
-	const auto ySteps = unsigned int((DOMAIN_Y_MAX - DOMAIN_Y_MIN) / gs);
-	const auto zSteps = unsigned int((DOMAIN_Z_MAX - DOMAIN_Z_MIN) / gs);
+	const auto xSteps = unsigned int((domainXMax - domainXMin) / gs);
+	const auto ySteps = unsigned int((domainYMax - domainYMin) / gs);
+	const auto zSteps = unsigned int((domainZMax - domainZMin) / gs);
 
 	if (grids.size() == xSteps * ySteps * zSteps) return;
 	grids.clear();
 
 	for (auto zi = 0u; zi < zSteps; zi++)
 	{
-		auto z = DOMAIN_Z_MIN + zi * gs;
+		auto z = domainZMin + zi * gs;
 		for (auto yi = 0u; yi < ySteps; yi++)
 		{
-			auto y = DOMAIN_Y_MIN + yi * gs;
+			auto y = domainYMin + yi * gs;
 			for (auto xi = 0u; xi < xSteps; xi++)
 			{
-				auto x = DOMAIN_X_MIN + xi * gs;
+				auto x = domainXMin + xi * gs;
 				grids.push_back(MarchingCubes::Grid{
 					{
 						Vector3d(x, y, z + gs),
@@ -82,17 +82,17 @@ double MetaBall::getGridSize()
 	switch (ModelerDrawState::Instance()->m_quality)
 	{
 	case HIGH:
-		gridSize = 0.5;
+		gridSize = 0.25;
 		break;
 	case MEDIUM:
 	default:
-		gridSize = 1;
+		gridSize = 0.5;
 		break;
 	case LOW:
-		gridSize = 2;
+		gridSize = 1;
 		break;
 	case POOR: 
-		gridSize = 3;
+		gridSize = 2;
 		break;
 	}
 

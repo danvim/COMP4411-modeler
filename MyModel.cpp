@@ -218,21 +218,6 @@ void MyModel::draw()
 	
 
 	glPopMatrix();
-
-	// meta ball
-	auto* metaBallPtr = MetaBall::getInstancePtr();
-	if (metaBallPtr->spheres.empty())
-	{
-		metaBallPtr->spheres.push_back({
-			{0, 5, 0},
-			2
-			});
-		metaBallPtr->spheres.push_back({
-			{0, 8, 0},
-			1
-			});
-	}
-	metaBallPtr->drawMetaBalls();
 }
 
 void MyModel::drawArm(int levels, int curDept)
@@ -247,6 +232,25 @@ void MyModel::drawArm(int levels, int curDept)
 		return;
 	}
 
+	static auto* metaBallPtr = new MetaBall();
+	metaBallPtr->domainXMin = -3;
+	metaBallPtr->domainXMax = 3;
+	metaBallPtr->domainYMin = -3;
+	metaBallPtr->domainYMax = 5;
+	metaBallPtr->domainZMin = -3;
+	metaBallPtr->domainZMax = 3;
+	if (metaBallPtr->spheres.empty())
+	{
+		metaBallPtr->spheres.push_back({
+		{0, 0, 0},
+		1.0
+			});
+		metaBallPtr->spheres.push_back({
+		{0, 2, 0},
+		1.0
+		});
+	}
+
 	glPushMatrix();
 		// set vertical axis rotation
 		glRotated(VAL(ARM1V + curDept*2)+(mood==1)*moodTick, 0, 1, 0);
@@ -256,14 +260,19 @@ void MyModel::drawArm(int levels, int curDept)
 		
 		//vertical arm cylinder
 		glPushMatrix();
-			if(VAL(BOXARMS)==0)
+			if(VAL(BOXARMS)==0 && VAL(METABALL) == 0)
 			{
 				glRotated(-90, 1, 0, 0);
 				drawCylinder(2, 1, 1);
-			}else
+			}
+			else if (VAL(METABALL) == 0)
 			{
 				glTranslated(-1, 0, -0.5);
 				drawBox(2, 2, 1);
+			} else
+			{
+				//Meta-ball
+				metaBallPtr->drawMetaBalls();
 			}
 		glPopMatrix();
 

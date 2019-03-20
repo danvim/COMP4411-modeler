@@ -12,12 +12,12 @@ public:
 		GLdouble r;
 	};
 
-	inline static const double DOMAIN_X_MIN = -5.0;
-	inline static const double DOMAIN_X_MAX = 5.0;
-	inline static const double DOMAIN_Y_MIN = 0.0;
-	inline static const double DOMAIN_Y_MAX = 10.0;
-	inline static const double DOMAIN_Z_MIN = -5.0;
-	inline static const double DOMAIN_Z_MAX = 5.0;
+	double domainXMin = -5.0;
+	double domainXMax = 5.0;
+	double domainYMin = 0.0;
+	double domainYMax = 10.0;
+	double domainZMin = -5.0;
+	double domainZMax = 5.0;
 
 	inline static double threshold = 1.0;
 	inline static MetaBall* instancePtr = nullptr;
