@@ -2,6 +2,7 @@
 #include "modelerapp.h"
 #include <vector>
 #include "IkSolver.h"
+#include "MetaBall.h"
 
 extern double rad(double deg);
 
@@ -151,8 +152,8 @@ void MyModel::draw()
 	setDiffuseColor(0.5f, 0.9f, 0.9f);
 	glTranslated(-4, 0.001, -1);
 	drawLathe({ {0, 0.96}, {0.5, 1}, {0.84, 1.3}, {0.83, 1.84}, {0.5, 2.6}, {0.6, 2.6}, {0.94, 1.84}, {0.94, 1.25}, {0.54, 0.91}, {0.1, 0.86}, {0.1, 0.1}, {1, 0}, {0,0} }); //wine glass
-	setDiffuseColor(0.4f, 0.f, 0.f);
-	drawLathe({ {0, 0.96}, {0.5, 1}, {0.84, 1.3}, {0.83, 1.84}, {0, 1.84}});
+	setDiffuseColor(0.2f, 0.f, 0.02f);
+	drawLathe({ {0, 1.84}, {0.83, 1.84}, {0.84, 1.3}, {0.5, 1}, {0, 0.96} }); //wine
 	glPopMatrix();
 
 	if (VAL(SHOWPRISM)) {
@@ -217,6 +218,21 @@ void MyModel::draw()
 	
 
 	glPopMatrix();
+
+	// meta ball
+	auto* metaBallPtr = MetaBall::getInstancePtr();
+	if (metaBallPtr->spheres.empty())
+	{
+		metaBallPtr->spheres.push_back({
+			{0, 5, 0},
+			2
+			});
+		metaBallPtr->spheres.push_back({
+			{0, 8, 0},
+			1
+			});
+	}
+	metaBallPtr->drawMetaBalls();
 }
 
 void MyModel::drawArm(int levels, int curDept)
